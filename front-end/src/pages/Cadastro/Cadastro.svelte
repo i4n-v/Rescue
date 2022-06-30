@@ -64,7 +64,7 @@ import Button from "../../components/Buttons/OutlinedButton.svelte";
   </div>
 
   <div class="form-container">
-    <h2>Cadastre-se<span class="dot">.</span></h2>
+    <h1 class="titulo">Cadastre-se<span class="dot">.</span></h1>
 
     <form>
       <div class="form-field">
@@ -109,6 +109,9 @@ import Button from "../../components/Buttons/OutlinedButton.svelte";
 
   main {
     display: flex;
+  }
+  .titulo {
+    font: var(--poppins-xxl);
   }
   .dot {
     color: #4892BC;
