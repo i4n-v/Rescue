@@ -68,27 +68,27 @@ import Button from "../../components/Buttons/OutlinedButton.svelte";
 
     <form>
       <div class="form-field">
-        <label for="nome">Nome:</label>
+        <label for="nome">Nome</label>
         <input type="text" id="nome" placeholder="Seu nome" bind:value={user.nome}>
         <div class="error">{ erros.nome }</div>
       </div>
       <div class="form-field">
-        <label for="cpf">CPF:</label>
+        <label for="cpf">CPF</label>
         <input type="text" id="cpf" placeholder="Insira somente números" bind:value={user.cpf}>
         <div class="error">{ erros.cpf }</div>
       </div>
       <div class="form-field">
-        <label for="email">Email:</label>
+        <label for="email">Email</label>
         <input type="email" id="email" placeholder="contato@email.com" bind:value={user.email}>
         <div class="error">{ erros.email }</div>
       </div>
       <div class="form-field">
-        <label for="senha">Senha:</label>
+        <label for="senha">Senha</label>
         <input type="password" id="senha" bind:value={user.pwd}>
         <div class="error">{ erros.pwd }</div>
       </div>
       <div class="form-field">
-        <label for="confSenha">Confirmar senha:</label>
+        <label for="confSenha">Confirmar senha</label>
         <input type="password" id="confSenha" bind:value={confPwd}>
         <div class="error">{ erros.pwd }</div>
       </div>
@@ -109,6 +109,9 @@ import Button from "../../components/Buttons/OutlinedButton.svelte";
 
   main {
     display: flex;
+  }
+  label {
+    font: var(--poppins-s);
   }
   .titulo {
     font: var(--poppins-xxl);
