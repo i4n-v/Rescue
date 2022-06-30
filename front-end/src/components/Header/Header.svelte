@@ -18,7 +18,9 @@
 
 <header id="header-menu">
   <div>
-    <Logo />
+    <Link href="/">
+      <Logo />
+    </Link>
     <nav class="menu">
       <Link href="/inicio" className="menu-link">Explorar</Link>
       <Link href="/login" className="menu-link">Entrar</Link>

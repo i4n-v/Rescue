@@ -30,6 +30,7 @@
     border-radius: 5px;
     display: none;
     animation: scale 0.3s ease-in;
+    z-index: 1000;
   }
 
   #dropdown::after {
