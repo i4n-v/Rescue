@@ -7,3 +7,9 @@
 <a {href} use:link class={className}>
   <slot />
 </a>
+
+<style>
+  a {
+    text-decoration: none;
+  }
+</style>

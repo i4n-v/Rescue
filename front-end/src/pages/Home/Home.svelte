@@ -1,7 +1,7 @@
 <script>
   import { UnderlineButton } from "../../components";
   import Water from "../../assets/svg/Water.svelte";
-  import Doubts from "../../assets/svg/Doubts.svelte";
+  import Doubts from "../../assets/svg/Doubts2.svelte";
   import DoubtsMin from "../../assets/svg/DoubtsMin.svelte";
   import computerImage from "../../assets/img/computer-img.png";
 
