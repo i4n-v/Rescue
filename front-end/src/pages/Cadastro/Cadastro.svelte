@@ -175,14 +175,30 @@
 <style>
   main {
     display: flex;
+    flex-direction: row;
+    height: 100%;
+    margin: 0;
   }
   .titulo {
     font: var(--poppins-xxl);
   }
   .dot {
-    color: #4892bc;
+    color: var(--p01);
   }
   .botao {
     margin: 2rem;
   }
+
+  /* .form-field{
+    display: inline-block;
+  }
+  .img-container {
+    margin-right: 100px;
+    max-height: 820px;
+  }
+  .form-container {
+    margin-top: 100px;
+    margin-left: 350px;
+    margin-bottom: 40px;
+  } */
 </style>
