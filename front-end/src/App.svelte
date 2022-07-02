@@ -1,7 +1,7 @@
 <script>
   import { Router, Route } from "svelte-routing";
   import { Home, Cadastro } from "./pages";
-  import { Header, Footer, Wrapper } from "./components/";
+  import { Header, Footer, Wrapper, FormInput } from "./components/";
   export let urlRouter = window.location.pathname;
 </script>
 
