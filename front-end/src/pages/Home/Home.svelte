@@ -1,7 +1,7 @@
 <script>
-  import { UnderlineButton, Link } from "../../components";
+  import { UnderlineButton } from "../../components";
   import Water from "../../assets/svg/Water.svelte";
-  import Doubts from "../../assets/svg/Doubts.svelte";
+  import Doubts from "../../assets/svg/Doubts2.svelte";
   import DoubtsMin from "../../assets/svg/DoubtsMin.svelte";
   import computerImage from "../../assets/img/computer-img.png";
 
@@ -68,11 +68,8 @@
       Denuncie os seus problemas<span>.</span>
     </h2>
     <p class="description">
-      Buscamos sanar toda e qualquer questão que você tiver. Mas antes de nos
-      contatar dê uma olhada nas <Link href="/duvidas" className="action-link"
-        >dúvidas frequentes</Link
-      >
-      dos nossos usuários.
+      Através de pequenas postagens você será um herói, nos ajudando a salvar
+      pessoas, resolver problemas e tornar nossa comunidade cada vez melhor.
     </p>
   </div>
 </section>
@@ -240,17 +237,6 @@
 
   .min {
     display: none !important;
-  }
-
-  :global(.action-link) {
-    text-decoration: none;
-    color: var(--p01);
-    font: var(--roboto-l-b);
-    transition: 0.3s ease-in-out;
-  }
-
-  :global(.action-link:hover) {
-    color: var(--p03);
   }
 
   @media (max-width: 600px) {
