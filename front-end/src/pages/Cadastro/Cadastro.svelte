@@ -71,11 +71,15 @@
 <!-- código HTML -->
 <main>
   <div class="img-container">
-    <img src="/src/assets/img/aside-logo.png" alt="Logo da Rescue" />
+    <img src="/src/assets/img/aside-logo.png" alt="Logo da Rescue" width="200%" height="110%" />
   </div>
 
   <div class="form-container">
     <h1 class="titulo">Cadastre-se<span class="dot">.</span></h1>
+
+    <!-- <br>
+    <br>
+    <br> -->
 
     <form>
       <div class="form-field">
@@ -157,7 +161,7 @@
           }}
         />
       </div>
-      <p>
+      <p class="interaja">
         Já possui uma conta? Então <Link href="/login">interaja conosco</Link>.
       </p>
       <div class="botao">
@@ -185,20 +189,24 @@
   .dot {
     color: var(--p01);
   }
-  .botao {
-    margin: 2rem;
+  .interaja {
+    margin: 2rem auto;
+  }
+  form {
+    margin: 3rem auto;
   }
 
-  /* .form-field{
+  .form-field{
     display: inline-block;
   }
-  .img-container {
-    margin-right: 100px;
+  .img-container{
+    margin-right: 1.5rem;
     max-height: 820px;
   }
-  .form-container {
-    margin-top: 100px;
-    margin-left: 350px;
-    margin-bottom: 40px;
-  } */
+  .form-container{
+    margin-top: 6rem;
+    margin-left: 22rem;
+    margin-bottom: 2.5rem;
+    
+  }
 </style>
