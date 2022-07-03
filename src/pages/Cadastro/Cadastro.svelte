@@ -70,15 +70,18 @@
 
 <!-- código HTML -->
 <main>
-  <div id="img-container">
-    <!--<img src="/src/assets/img/aside-logo.png" alt="Logo da Rescue" />-->
+  <div class="img-container">
+    <img src="/src/assets/img/aside-logo.png" alt="Logo da Rescue" width="200%" height="110%" />
   </div>
 
   <div class="form-container">
     <h1 class="titulo">Cadastre-se<span class="dot">.</span></h1>
 
+    <!-- <br>
+    <br>
+    <br> -->
+
     <form>
-    <div class="divInline">
       <div class="form-field">
         <FormInput 
           id="nome"
@@ -112,7 +115,6 @@
           }}
         />
       </div>
-    </div>
       <div class="form-field">
         <FormInput 
           id="email"
@@ -159,7 +161,7 @@
           }}
         />
       </div>
-      <p>
+      <p class="interaja">
         Já possui uma conta? Então <Link href="/login">interaja conosco</Link>.
       </p>
       <div class="botao">
@@ -175,57 +177,51 @@
 
 <!-- código CSS -->
 <style>
-  main {
+ /* main {
     display: flex;
     flex-direction: row;
     height: 100%;
     margin: 0;
-  }
-  p{
-    font: var(--roboto-xs);
-  }
+  }*/
   .titulo {
     font: var(--poppins-xxl);
   }
   .dot {
     color: var(--p01);
   }
-  .botao {
-    margin: 2rem;
+  .interaja {
+    font: var(--roboto-s);
+    margin: 2rem auto;
   }
 
-  .form-field{
-    margin-top: 15px;
-    margin-bottom: 5px;
+  .form-field{ 
+    margin-top: 1rem;
+    margin-bottom: 1rem; 
   }
-  .form-container {
+  .img-container{
+    /*margin-right: 30rem;
+    max-height: 820px;*/
     display: flex;
-  } 
-  /*.divInline{
-    float: right;
-    display: flex;
-    margin-bottom: auto;
-  }*/
-  #img-container {
-    width: 50%;
-    height: 900px;
-    position: relative;
-    background: url("/src/assets/img/aside-logo.png") center no-repeat;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0px;
-  }
-  @media(min-width:1200px){
-    .form-container{
-      margin-top: 100px;
-      margin-left: 155px;
-      margin-bottom: 40px;
-      display: inline-block;
-    }
+    flex-wrap: wrap;
+    margin-right: auto;
+    width: auto;
     
-  
+  }
+  .form-container{ 
+    display: inline-block;
+    margin: auto;
+    margin-left: 6rem auto;
+    
+  }
+  main{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1308px;
+
+    margin: auto;
+    align-items: center;
+    
   }
 
+  
 </style>
