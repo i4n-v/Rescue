@@ -71,7 +71,7 @@
 <!-- código HTML -->
 <main>
   <div class="img-container">
-    <img src="/src/assets/img/aside-logo.png" alt="Logo da Rescue" width="200%" height="110%" />
+    <img src="/src/assets/img/aside-logo.png" alt="Logo da Rescue" width="100%" height="100%" />
   </div>
 
   <div class="form-container">
@@ -177,36 +177,39 @@
 
 <!-- código CSS -->
 <style>
-  main {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    margin: 0;
-  }
-  .titulo {
-    font: var(--poppins-xxl);
-  }
-  .dot {
-    color: var(--p01);
-  }
-  .interaja {
-    margin: 2rem auto;
-  }
-  form {
-    margin: 3rem auto;
-  }
-
-  .form-field{
-    display: inline-block;
-  }
-  .img-container{
-    margin-right: 1.5rem;
-    max-height: 820px;
-  }
-  .form-container{
-    margin-top: 6rem;
-    margin-left: 22rem;
-    margin-bottom: 2.5rem;
-    
-  }
-</style>
+   main {
+     display: flex;
+     flex-wrap: wrap;
+     max-width: 1308px;
+     margin: auto;
+     align-items: center;
+   }
+   .titulo {
+     font: var(--poppins-xxl);
+   }
+   .dot {
+     color: var(--p01);
+   }
+   .interaja {
+     font: var(--roboto-s);
+     margin: 2rem auto;
+   }
+   .form-field{ 
+     margin-top: 1rem;
+     margin-bottom: 1rem; 
+   }
+   .img-container{
+     /*margin-right: 30rem;
+     max-height: 820px;*/
+     display: flex;
+     flex-wrap: wrap;
+     margin-right: auto;
+     max-width: auto;
+     
+   }
+   .form-container{ 
+     display: inline-block;
+     margin: auto;
+     
+   }
+ </style>
