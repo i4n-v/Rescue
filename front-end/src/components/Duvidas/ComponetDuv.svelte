@@ -22,7 +22,7 @@ function click(){
                 <h2>
                     {pergunta}
                 </h2>
-                <span class={`dropdown ${display ? "rotate" : ""}`}  on:click={click}  >
+                <span class={`dropdown ${display ? "" : "rotate"}`}  on:click={click}  >
                     <Dropdown/>
                 </span>
             </div>
@@ -67,8 +67,8 @@ function click(){
     cursor: pointer;
 }
 
-:global(.rotate){
-    animation: rotate 0.3s;
+.rotate{
+    transform: rotate(180deg);
 }
 
 @media(max-width : 600px){
