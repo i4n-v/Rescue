@@ -7,6 +7,7 @@ import UnderlineButton from "./Buttons/UnderlineButton.svelte";
 import SubmitButton from "./Buttons/SubmitButton.svelte";
 import Dropdown from "./Dropdown/Dropdown.svelte";
 import FormInput from "./FormInput/FormInput.svelte";
+import ComponetDuv from "./Duvidas/ComponetDuv.svelte";
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   Dropdown,
   FormInput,
   SubmitButton,
+  ComponetDuv,
 }
