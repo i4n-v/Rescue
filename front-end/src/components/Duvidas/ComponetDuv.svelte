@@ -1,36 +1,39 @@
 <script>
 import BluePoint from  "../../assets/svg/BluePoint.svelte";
 import Dropdown from  "../../assets/svg/Dropdown.svelte";
+import { onMount } from "svelte";
 export let pergunta = "";
 export let resposta = "";
 
 let display = false;
-function isRotated(){
-    display = !display
-}
+
 function click(){
     display = !display
 }
+
+onMount(() => {
+    window.scrollTo(0, 0);
+  });
 </script>
-    <ul class="list">
-        <li class="list-item">
-            
-            <div class="list-quest" >
-                <span class="point">
-                    <BluePoint/>
-                </span>
-                <h2>
-                    {pergunta}
-                </h2>
-                <span class={`dropdown ${display ? "" : "rotate"}`}  on:click={click}  >
-                    <Dropdown/>
-                </span>
-            </div>
-            <div class={display ? "list-answer-off" : "list-answer-on"} >
-                <p>{resposta}</p>
-            </div>
-        </li>
-    </ul>
+
+<ul class="list">
+    <li class="list-item">
+        <div class="list-quest" >
+            <span class="point">
+                <BluePoint/>
+            </span>
+            <h2>
+                {pergunta}
+            </h2>
+            <span class={`dropdown ${display ? "rotate" : "rotate-reverse"}`}  on:click={click}  >
+                <Dropdown/>
+            </span>
+        </div>
+        <div class={display ? "list-answer-on" : "list-answer-off"} >
+            <p>{resposta}</p>
+        </div>
+    </li>
+</ul>
 <style>
 .list{
     padding: 20px;
@@ -54,6 +57,7 @@ function click(){
     color: var(--c09);
     font:var(--roboto-m);
     display: block;
+    animation: scale 0.3s ease-in ;
 }
 .list-answer-off{
     color: var(--c09);
@@ -68,9 +72,12 @@ function click(){
 }
 
 .rotate{
-    transform: rotate(180deg);
+    animation: rotate 0.5s forwards;
 }
 
+.rotate-reverse{
+    animation: rotate-reverse 0.5s forwards;
+}
 @media(max-width : 600px){
     .list-quest{
         font: var(--poppins-s);
