@@ -61,6 +61,10 @@ try {
   $stmt->execute([$name, $email, $password]);
   $userId = $pdo->lastInsertId();
 
+  $query = "INSERT INTO `ADDRESS` (`USER_ID`) VALUES (?)";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$userId]);
+
   $query = "INSERT INTO `INSTITUTIONS` (`INST_CNPJ`, `USER_ID`) VALUES (?, ?)";
   $stmt = $pdo->prepare($query);
   $stmt->execute([$cnpj, $userId]);

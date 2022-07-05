@@ -13,9 +13,9 @@ if (!$token) {
 }
 
 try {
-  $query = "SELECT `USER_ID`, `USER_NAME`, `USER_EMAIL` FROM `USERS` WHERE `USER_TOKEN` = ? AND `USER_ID` = ?";
+  $query = "SELECT `USERS`.`USER_ID`, `USER_NAME`, `USER_EMAIL`, `ADDR_ID`, `ADDR_CEP`, `ADDR_STATE`, `ADDR_CITY`, `ADDR_PUBLIC_PLACE` FROM `USERS` LEFT JOIN `ADDRESS` ON `USERS`.`USER_ID` = ? AND `ADDRESS`.`USER_ID` = ? WHERE `USERS`.`USER_TOKEN` = ?";
   $stmt = $pdo->prepare($query);
-  $stmt->execute([$token, $id]);
+  $stmt->execute([$id, $id, $token]);
   $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 
   if (!!$userData) {
