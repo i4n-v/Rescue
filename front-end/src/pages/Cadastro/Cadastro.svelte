@@ -3,67 +3,64 @@
   import { Link, FormInput, SubmitButton } from "../../components/";
   import { validate, cpfMask, cnpjMask } from "../../scripts/validateForm";
 
-
   let nome = {
     value: "",
-    error: null
-  }
+    error: null,
+  };
   let cpf = {
     value: "",
-    error: null
-  }
+    error: null,
+  };
   let email = {
     value: "",
-    error: null
-  }
+    error: null,
+  };
   let senha = {
     value: "",
-    error: null
-  }
+    error: null,
+  };
   let confSenha = {
     value: "",
-    error: null
-  }
+    error: null,
+  };
 
   let newUser = {
     nome: {
       value: "",
-      error: null
+      error: null,
     },
     cpf: {
       value: "",
-      error: null
+      error: null,
     },
     email: {
       value: "",
-      error: null
+      error: null,
     },
     senha: {
       value: "",
-      error: null
+      error: null,
     },
     confSenha: {
       value: "",
-      error: null
-    }
-  }
-
+      error: null,
+    },
+  };
 
   function handleSubmit() {
-    if(
+    if (
       validate(newUser.nome.value, "nome").valide &&
       validate(newUser.cpf.value, "cpf").valide &&
       validate(newUser.email.value, "email").valide &&
       validate(newUser.senha.value, "password").valide &&
       newUser.senha.value === newUser.confSenha.value
-      ){
-
-        console.log(
-          newUser.nome.value,
-          newUser.cpf.value,
-          newUser.email.value, 
-          newUser.senha.value
-          );
+    ) {
+      console.log(
+        newUser.nome.value,
+        newUser.cpf.value,
+        newUser.email.value,
+        newUser.senha.value
+      );
     }
   }
 </script>
@@ -71,7 +68,12 @@
 <!-- código HTML -->
 <main>
   <div class="img-container">
-    <img src="/src/assets/img/aside-logo.png" alt="Logo da Rescue" width="100%" height="100%" />
+    <img
+      src="/src/assets/img/aside-logo.png"
+      alt="Logo da Rescue"
+      width="100%"
+      height="100%"
+    />
   </div>
 
   <div class="form-container">
@@ -83,7 +85,7 @@
 
     <form>
       <div class="form-field">
-        <FormInput 
+        <FormInput
           id="nome"
           type="text"
           label="Nome"
@@ -93,13 +95,13 @@
           setValue={(value) => {
             newUser.nome = {
               value: value,
-              error: validate(value, "nome").describe
+              error: validate(value, "nome").describe,
             };
           }}
         />
       </div>
       <div class="form-field">
-        <FormInput 
+        <FormInput
           id="cpf"
           type="text"
           label="CPF"
@@ -110,13 +112,13 @@
           setValue={(value) => {
             newUser.cpf = {
               value: cpfMask(value),
-              error: validate(value, "cpf").describe
+              error: validate(value, "cpf").describe,
             };
           }}
         />
       </div>
       <div class="form-field">
-        <FormInput 
+        <FormInput
           id="email"
           type="text"
           label="Email"
@@ -126,13 +128,13 @@
           setValue={(value) => {
             newUser.email = {
               value: value,
-              error: validate(value, "email").describe
+              error: validate(value, "email").describe,
             };
           }}
         />
       </div>
       <div class="form-field">
-        <FormInput 
+        <FormInput
           id="senha"
           type="password"
           label="Senha"
@@ -141,13 +143,13 @@
           setValue={(value) => {
             newUser.senha = {
               value: value,
-              error: validate(value, "password").describe
+              error: validate(value, "password").describe,
             };
           }}
         />
       </div>
       <div class="form-field">
-        <FormInput 
+        <FormInput
           id="confSenha"
           type="password"
           label="Confirmar senha"
@@ -156,7 +158,7 @@
           setValue={(value) => {
             newUser.confSenha = {
               value: value,
-              error: validate(value, "password").describe
+              error: validate(value, "password").describe,
             };
           }}
         />
@@ -165,11 +167,7 @@
         Já possui uma conta? Então <Link href="/login">interaja conosco</Link>.
       </p>
       <div class="botao">
-        <SubmitButton
-          onSubmit={handleSubmit}
-        >
-          REGISTRAR-SE
-        </SubmitButton>
+        <SubmitButton onSubmit={handleSubmit}>REGISTRAR-SE</SubmitButton>
       </div>
     </form>
   </div>
@@ -177,39 +175,37 @@
 
 <!-- código CSS -->
 <style>
-   main {
-     display: flex;
-     flex-wrap: wrap;
-     max-width: 1308px;
-     margin: auto;
-     align-items: center;
-   }
-   .titulo {
-     font: var(--poppins-xxl);
-   }
-   .dot {
-     color: var(--p01);
-   }
-   .interaja {
-     font: var(--roboto-s);
-     margin: 2rem auto;
-   }
-   .form-field{ 
-     margin-top: 1rem;
-     margin-bottom: 1rem; 
-   }
-   .img-container{
-     /*margin-right: 30rem;
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1308px;
+    margin: auto;
+    align-items: center;
+  }
+  .titulo {
+    font: var(--poppins-xxl);
+  }
+  .dot {
+    color: var(--p01);
+  }
+  .interaja {
+    font: var(--roboto-s);
+    margin: 2rem auto;
+  }
+  .form-field {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .img-container {
+    /*margin-right: 30rem;
      max-height: 820px;*/
-     display: flex;
-     flex-wrap: wrap;
-     margin-right: auto;
-     max-width: auto;
-     
-   }
-   .form-container{ 
-     display: inline-block;
-     margin: auto;
-     
-   }
- </style>
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: auto;
+    max-width: auto;
+  }
+  .form-container {
+    display: inline-block;
+    margin: auto;
+  }
+</style>
