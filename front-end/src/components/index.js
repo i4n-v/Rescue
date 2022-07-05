@@ -8,6 +8,7 @@ import SubmitButton from "./Buttons/SubmitButton.svelte";
 import Dropdown from "./Dropdown/Dropdown.svelte";
 import FormInput from "./FormInput/FormInput.svelte";
 import ComponetDuv from "./Duvidas/ComponetDuv.svelte";
+import Compconf from "./Configuracoes/Compconf.svelte";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   FormInput,
   SubmitButton,
   ComponetDuv,
+  Compconf,
 }
