@@ -31,6 +31,7 @@
     min-width: 220px;
     display: flex;
     justify-content: space-between;
+    gap: 20px;
     border-radius: 5px;
     font: var(--roboto-xs);
     position: absolute;
