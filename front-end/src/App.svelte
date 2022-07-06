@@ -1,6 +1,6 @@
 <script>
   import { Router, Route } from "svelte-routing";
-  import { Home, Cadastro } from "./pages";
+  import { Home, Cadastro, Login } from "./pages";
   import { Header, Footer, Wrapper, FormInput } from "./components/";
   import Duvidas from "./pages/Duvidas/Duvidas.svelte";
   import Configuracoes from "./pages/Configuracoes/Config.svelte";
@@ -13,7 +13,7 @@
     <Route path="/" component={Home} />
     <Route path="/duvidas" component={Duvidas} />
     <Route path="/cadastro" component={Cadastro} />
-    <Route path="/login" component={Home} />
+    <Route path="/login" component={Login} />
     <Route path="/recuperar_senha" component={Home} />
     <Route path="/inicio" component={Home} />
     <Route path="/perfil" component={Home} />

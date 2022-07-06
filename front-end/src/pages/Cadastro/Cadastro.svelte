@@ -1,13 +1,32 @@
-<!-- código JavaScript -->
 <script>
-  import { Link, FormInput, SubmitButton } from "../../components/";
+  import {
+    Link,
+    FormInput,
+    SubmitButton,
+    SelectButton,
+  } from "../../components/";
+  import ToTopPage from "../../helper/ToTopPage.svelte";
+  import Message from "../../helper/Message.svelte";
   import { validate, cpfMask, cnpjMask } from "../../scripts/validateForm";
+  import { postPeople } from "../../services/peopleService";
+  import { postInstitution } from "../../services/institutionService";
+
+  let loading = false;
+  let error = false;
+  let success = false;
+  let message = "";
+  let profile = "Pessoa física";
+  let disableRegister = true;
 
   let nome = {
     value: "",
     error: null,
   };
   let cpf = {
+    value: "",
+    error: null,
+  };
+  let cnpj = {
     value: "",
     error: null,
   };
@@ -19,193 +38,309 @@
     value: "",
     error: null,
   };
-  let confSenha = {
+  let confirmSenha = {
     value: "",
     error: null,
   };
 
-  let newUser = {
-    nome: {
-      value: "",
-      error: null,
-    },
-    cpf: {
-      value: "",
-      error: null,
-    },
-    email: {
-      value: "",
-      error: null,
-    },
-    senha: {
-      value: "",
-      error: null,
-    },
-    confSenha: {
-      value: "",
-      error: null,
-    },
-  };
+  function handleClose() {
+    error = false;
+    success = false;
+    message = "";
+  }
 
-  function handleSubmit() {
-    if (
-      validate(newUser.nome.value, "nome").valide &&
-      validate(newUser.cpf.value, "cpf").valide &&
-      validate(newUser.email.value, "email").valide &&
-      validate(newUser.senha.value, "password").valide &&
-      newUser.senha.value === newUser.confSenha.value
-    ) {
-      console.log(
-        newUser.nome.value,
-        newUser.cpf.value,
-        newUser.email.value,
-        newUser.senha.value
-      );
+  function allFieldValidate() {
+    return (
+      validate(nome.value).valide &&
+      validate(email.value, "email").valide &&
+      validate(senha.value, "password").valide &&
+      validate(confirmSenha.value, "password").valide &&
+      (validate(cpf.value, "cpf") || validate(cnpj.value, "cnpj"))
+    );
+  }
+
+  async function handleSubmit() {
+    if (allFieldValidate()) {
+      const userData = {
+        name: nome.value,
+        email: email.value,
+        password: senha.value,
+        confirmPassword: confirmSenha.value,
+      };
+
+      try {
+        loading = true;
+        if (profile === "Pessoa física") {
+          userData.cpf = cpf.value;
+          const response = await postPeople(userData);
+          message = response.message;
+          success = true;
+        } else {
+          userData.cnpj = cnpj.value;
+          const response = await postInstitution(userData);
+          message = response.message;
+          success = true;
+        }
+
+        nome = {
+          value: "",
+          error: null,
+        };
+        cpf = {
+          value: "",
+          error: null,
+        };
+        cnpj = {
+          value: "",
+          error: null,
+        };
+        email = {
+          value: "",
+          error: null,
+        };
+        senha = {
+          value: "",
+          error: null,
+        };
+        confirmSenha = {
+          value: "",
+          error: null,
+        };
+      } catch (error) {
+        message = error.response.data.message;
+      } finally {
+        error = !success;
+        loading = false;
+      }
     }
   }
 </script>
 
-<!-- código HTML -->
-<main>
-  <div class="img-container">
-    <img
-      src="/src/assets/img/aside-logo.png"
-      alt="Logo da Rescue"
-      width="100%"
-      height="100%"
-    />
-  </div>
+<svelte:head>
+  <title>Rescue | Cadastro</title>
+</svelte:head>
 
-  <div class="form-container">
-    <h1 class="titulo">Cadastre-se<span class="dot">.</span></h1>
-
-    <!-- <br>
-    <br>
-    <br> -->
-
-    <form>
-      <div class="form-field">
+<ToTopPage>
+  <Message {success} {error} {message} {handleClose} />
+  <section class="wrapper">
+    <div class="img-container">
+      <img src="/src/assets/img/aside-logo.png" alt="Logo da Rescue" />
+    </div>
+    <div class="form-container anime-left">
+      <h1 class="title">Cadastre-se<span>.</span></h1>
+      <form>
+        <SelectButton
+          value={profile}
+          options={["Pessoa física", "Instituição"]}
+          handleOption={(option) => (profile = option)}
+          className="col-span-2"
+        />
         <FormInput
           id="nome"
           type="text"
           label="Nome"
           placeholder="Seu nome"
-          value={newUser.nome.value}
-          error={newUser.nome.error}
+          required
+          value={nome.value}
+          error={nome.error}
           setValue={(value) => {
-            newUser.nome = {
+            nome = {
               value: value,
-              error: validate(value, "nome").describe,
+              error: validate(value).describe,
             };
+            disableRegister = !allFieldValidate();
           }}
         />
-      </div>
-      <div class="form-field">
-        <FormInput
-          id="cpf"
-          type="text"
-          label="CPF"
-          placeholder="000.000.000-00"
-          maxlength="14"
-          value={newUser.cpf.value}
-          error={newUser.cpf.error}
-          setValue={(value) => {
-            newUser.cpf = {
-              value: cpfMask(value),
-              error: validate(value, "cpf").describe,
-            };
-          }}
-        />
-      </div>
-      <div class="form-field">
+        {#if profile === "Pessoa física"}
+          <FormInput
+            id="cpf"
+            type="text"
+            label="CPF"
+            placeholder="000.000.000-00"
+            required
+            maxlength="14"
+            value={cpf.value}
+            error={cpf.error}
+            setValue={(value) => {
+              cpf = {
+                value: cpfMask(value),
+                error: validate(value, "cpf").describe,
+              };
+              disableRegister = !allFieldValidate();
+            }}
+          />
+        {:else}
+          <FormInput
+            id="cnpj"
+            type="text"
+            label="CNPJ"
+            placeholder="00.000.000/0000-00"
+            required
+            maxlength="18"
+            value={cnpj.value}
+            error={cnpj.error}
+            setValue={(value) => {
+              cnpj = {
+                value: cnpjMask(value),
+                error: validate(value, "cnpj").describe,
+              };
+              disableRegister = !allFieldValidate();
+            }}
+          />
+        {/if}
         <FormInput
           id="email"
           type="text"
           label="Email"
           placeholder="contato@email.com"
-          value={newUser.email.value}
-          error={newUser.email.error}
+          required
+          className="col-span-2"
+          value={email.value}
+          error={email.error}
           setValue={(value) => {
-            newUser.email = {
+            email = {
               value: value,
               error: validate(value, "email").describe,
             };
+            disableRegister = !allFieldValidate();
           }}
         />
-      </div>
-      <div class="form-field">
         <FormInput
           id="senha"
           type="password"
           label="Senha"
-          value={newUser.senha.value}
-          error={newUser.senha.error}
+          minlength="8"
+          required
+          className="col-span-2"
+          value={senha.value}
+          error={senha.error}
           setValue={(value) => {
-            newUser.senha = {
+            senha = {
               value: value,
               error: validate(value, "password").describe,
             };
+            disableRegister = !allFieldValidate();
           }}
         />
-      </div>
-      <div class="form-field">
         <FormInput
           id="confSenha"
           type="password"
+          className="col-span-2"
           label="Confirmar senha"
-          value={newUser.confSenha.value}
-          error={newUser.confSenha.error}
+          minlength="8"
+          required
+          value={confirmSenha.value}
+          error={confirmSenha.error}
           setValue={(value) => {
-            newUser.confSenha = {
+            confirmSenha = {
               value: value,
               error: validate(value, "password").describe,
             };
+            disableRegister = !allFieldValidate();
           }}
         />
-      </div>
-      <p class="interaja">
-        Já possui uma conta? Então <Link href="/login">interaja conosco</Link>.
-      </p>
-      <div class="botao">
-        <SubmitButton onSubmit={handleSubmit}>REGISTRAR-SE</SubmitButton>
-      </div>
-    </form>
-  </div>
-</main>
+        <p class="col-span-2">
+          Já possui uma conta? Então <Link href="/login" className="action-link"
+            >interaja conosco</Link
+          >.
+        </p>
+        <SubmitButton
+          disabled={disableRegister}
+          {loading}
+          maxWidth="193px"
+          onSubmit={handleSubmit}
+          >REGISTRAR-SE
+        </SubmitButton>
+      </form>
+    </div>
+  </section>
+</ToTopPage>
 
-<!-- código CSS -->
 <style>
-  main {
+  .wrapper {
     display: flex;
-    flex-wrap: wrap;
-    max-width: 1308px;
-    margin: auto;
-    align-items: center;
+    width: 100%;
+    min-height: 800px;
+    gap: 40px;
   }
-  .titulo {
+
+  .img-container {
+    width: 768px;
+  }
+
+  .wrapper > div > img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .title {
     font: var(--poppins-xxl);
   }
-  .dot {
+
+  .title > span {
     color: var(--p01);
   }
-  .interaja {
-    font: var(--roboto-s);
-    margin: 2rem auto;
-  }
-  .form-field {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-  .img-container {
-    /*margin-right: 30rem;
-     max-height: 820px;*/
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: auto;
-    max-width: auto;
-  }
+
   .form-container {
-    display: inline-block;
-    margin: auto;
+    display: flex;
+    width: 768px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 60px;
+  }
+
+  .form-container > form {
+    width: 100%;
+    max-width: 560px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .form-container p {
+    font: var(--roboto-xs);
+    color: var(--c11);
+  }
+
+  .form-container :global(.action-link) {
+    font: var(--roboto-xs);
+    font-weight: 500;
+  }
+
+  :global(.col-span-2) {
+    grid-column: 1/3;
+  }
+
+  @media (max-width: 1100px) {
+    .img-container {
+      display: none;
+    }
+
+    .wrapper {
+      justify-content: center;
+      padding: 0px 12px;
+    }
+
+    .form-container {
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 470px) {
+    .form-container > form {
+      grid-template-columns: 1fr;
+    }
+
+    :global(.col-span-2) {
+      grid-column: 1/-1;
+    }
+
+    .wrapper {
+      margin: 120px 0px;
+    }
+
+    .title {
+      font: var(--poppins-xl);
+    }
   }
 </style>
