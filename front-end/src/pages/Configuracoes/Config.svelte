@@ -1,9 +1,26 @@
 <script>
 import Compconf from "../../components/Configuracoes/Compconf.svelte"
+import FormInput from "../../components/FormInput/FormInput.svelte"
+import { validate, cpfMask} from "../../scripts/validateForm";
+
+let nome = {
+    value: "",
+    error: null,
+};
+let cpf = {
+    value: "",
+    error: null,
+};
+let email = {
+    value: "",
+    error: null,
+};
+
+
 </script>
 
-<div class="container">
-
+<div class="container grey-box">
+    
     <div class="black-box">
         <Compconf buttonName="Conta"/>
         <div class="borda"></div>
@@ -12,11 +29,13 @@ import Compconf from "../../components/Configuracoes/Compconf.svelte"
         <Compconf buttonName="Segurança"/>
         <div class="borda"></div>
     </div>
-    <div class="grey-box">
-        <input type="text" placeholder="teste">
-        <input type="text" placeholder="teste">
-        <input type="text" placeholder="teste">
-    </div>
+    <form>
+        <div class="form-field">
+        <FormInput label="Nome"/>
+        </div>
+
+        
+    </form>
     
 </div>
 
