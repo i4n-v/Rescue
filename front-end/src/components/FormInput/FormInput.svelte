@@ -7,6 +7,8 @@
   export let disabled = false;
   export let required = false;
   export let maxlength = false;
+  export let minlength = 0;
+  export let maxWidth = "100%";
   export let label = "Label";
   export let value = null;
   export let error = null;
@@ -15,7 +17,7 @@
   export let setValue = () => {};
 </script>
 
-<div class="field-container">
+<div class={`field-container ${className}`} style={`max-width: ${maxWidth}`}>
   <label class="label-form" for={id}>
     {label}
     <span>{required ? "*" : ""}</span>
@@ -28,7 +30,8 @@
     {value}
     {disabled}
     {maxlength}
-    class={`field-form ${className}`}
+    {minlength}
+    class="field-form"
     on:keypress={({ target }) => setValue(target.value)}
     on:change={({ target }) => setValue(target.value)}
     on:blur={({ target }) => setValue(target.value)}
@@ -46,18 +49,17 @@
   }
 
   .field-form {
-    min-width: 250px;
     min-height: 48px;
     padding: 0px 10px;
     background: var(--c01);
     border: 1px solid var(--c02);
     border-radius: 5px;
     font: var(--roboto-s);
-    color: var(--c07);
+    color: var(--c11);
     transition: 0.3s;
   }
 
-  .firld-form::placeholder {
+  .field-form::placeholder {
     font: var(--roboto-s);
     color: var(--c07);
   }
