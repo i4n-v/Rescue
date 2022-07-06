@@ -209,6 +209,7 @@
           id="senha"
           type="password"
           label="Senha"
+          minlength="8"
           required
           className="col-span-2"
           value={senha.value}
@@ -226,6 +227,7 @@
           type="password"
           className="col-span-2"
           label="Confirmar senha"
+          minlength="8"
           required
           value={confirmSenha.value}
           error={confirmSenha.error}
@@ -237,7 +239,7 @@
             disableRegister = !allFieldValidate();
           }}
         />
-        <p class="interaja col-span-2">
+        <p class="col-span-2">
           Já possui uma conta? Então <Link href="/login" className="action-link"
             >interaja conosco</Link
           >.
