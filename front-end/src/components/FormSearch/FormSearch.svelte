@@ -1,55 +1,52 @@
 <script>
+  import Search from "../../assets/svg/Search.svelte";
+
   // Atributes
   export let id = "";
-  export let type = "text";
   export let placeholder = "";
   export let className = "";
   export let disabled = false;
-  export let required = false;
-  export let maxlength = false;
-  export let minlength = 0;
   export let maxWidth = "100%";
-  export let label = "Label";
   export let value = null;
-  export let error = null;
 
   // Events
   export let setValue = () => {};
+  export let onClick = () => {};
 </script>
 
 <div class={`field-container ${className}`} style={`max-width: ${maxWidth}`}>
-  <label class="label-form" for={id}>
-    {label}
-    <span>{required ? "*" : ""}</span>
-  </label>
   <input
     {id}
     name={id}
-    {type}
+    type="search"
     {placeholder}
     {value}
     {disabled}
-    {maxlength}
-    {minlength}
-    class="field-form"
+    class="search-field"
     on:keypress={({ target }) => setValue(target.value)}
     on:change={({ target }) => setValue(target.value)}
     on:blur={({ target }) => setValue(target.value)}
   />
-  {#if !!error}
-    <p>{error}</p>
-  {/if}
+  <button
+    class="search-button"
+    type="button"
+    on:click={(event) => {
+      event.preventDefault();
+      onClick;
+    }}
+  >
+    <Search />
+  </button>
 </div>
 
 <style>
   .field-container {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    position: relative;
   }
 
-  .field-form {
+  .search-field {
     min-height: 48px;
+    min-width: 300px;
     padding: 0px 10px;
     background: var(--c01);
     border: 1px solid var(--c02);
@@ -59,13 +56,13 @@
     transition: 0.3s;
   }
 
-  .field-form::placeholder {
+  .search-field::placeholder {
     font: var(--roboto-s);
     color: var(--c07);
   }
 
-  .field-form:focus,
-  .field-form:hover {
+  .search-field:focus,
+  .search-field:hover {
     outline: none;
     border-color: var(--p02);
     box-shadow: 0px 0px 0px 2px var(--p01);
@@ -77,12 +74,19 @@
     color: var(--c11);
   }
 
-  .label-form > span {
-    color: var(--v02);
+  .search-button {
+    position: absolute;
+    top: 1px;
+    right: 0px;
+    border-radius: 5px;
+    padding: 5px 11px;
+    background-image: var(--gdr01);
+    border: none;
+    cursor: pointer;
   }
 
-  .field-container > p {
-    font: var(--roboto-xs);
-    color: var(--v03);
+  :global(.search-button:hover > svg > *) {
+    transition: 0.3s;
+    fill: var(--w);
   }
 </style>

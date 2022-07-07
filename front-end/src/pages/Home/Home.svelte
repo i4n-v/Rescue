@@ -1,5 +1,5 @@
 <script>
-  import { UnderlineButton, Link } from "../../components";
+  import { Wrapper, UnderlineButton, Link } from "../../components";
   import Water from "../../assets/svg/Water.svelte";
   import Doubts from "../../assets/svg/Doubts.svelte";
   import DoubtsMin from "../../assets/svg/DoubtsMin.svelte";
@@ -12,70 +12,74 @@
   <title>Rescue</title>
 </svelte:head>
 
-<div id="rescue-intro">
-  <div />
-  <section id="titles">
-    <h3 class="main-subtitle">AQUI SUA AÇÃO FAZ DIFERENÇA</h3>
-    <h1 class="main-title">
-      Nos ajude a cuidar da nossa comunidade<span>.</span>
-    </h1>
-  </section>
-</div>
-<section id="complaint-info">
-  <div class="complaint-description">
-    <h2 class="main-title">
-      Denuncie os seus problemas<span>.</span>
-    </h2>
-    <p class="description">
-      Através de pequenas postagens você será um herói, nos ajudando a salvar
-      pessoas, resolver problemas e tornar nossa comunidade cada vez melhor.
-    </p>
-    <UnderlineButton href="/cadastro">CONHEÇA NOSSA COMUNIDADE</UnderlineButton>
+<Wrapper>
+  <div id="rescue-intro">
+    <div />
+    <section id="titles">
+      <h3 class="main-subtitle">AQUI SUA AÇÃO FAZ DIFERENÇA</h3>
+      <h1 class="main-title">
+        Nos ajude a cuidar da nossa comunidade<span>.</span>
+      </h1>
+    </section>
   </div>
-  <div>
-    <img src={computerImage} alt="imagem de pessoa no computador." />
-  </div>
-</section>
-<section id="patners-info">
-  <div>
-    <div>
+  <section id="complaint-info">
+    <div class="complaint-description">
       <h2 class="main-title">
-        conheça nossos parceiros<span>.</span>
+        Denuncie os seus problemas<span>.</span>
       </h2>
       <p class="description">
-        Estão sempre preparados pra analisar e resolver sua dificuldade.
+        Através de pequenas postagens você será um herói, nos ajudando a salvar
+        pessoas, resolver problemas e tornar nossa comunidade cada vez melhor.
+      </p>
+      <UnderlineButton href="/cadastro"
+        >CONHEÇA NOSSA COMUNIDADE</UnderlineButton
+      >
+    </div>
+    <div>
+      <img src={computerImage} alt="imagem de pessoa no computador." />
+    </div>
+  </section>
+  <section id="patners-info">
+    <div>
+      <div>
+        <h2 class="main-title">
+          conheça nossos parceiros<span>.</span>
+        </h2>
+        <p class="description">
+          Estão sempre preparados pra analisar e resolver sua dificuldade.
+        </p>
+      </div>
+      <ul>
+        {#each institutions as institution}
+          <li>
+            <Water />
+            <span>{institution}</span>
+          </li>
+        {/each}
+      </ul>
+    </div>
+  </section>
+  <section id="doubt-info">
+    <div class="big">
+      <Doubts />
+    </div>
+    <div class="min">
+      <DoubtsMin />
+    </div>
+    <div>
+      <h2 class="main-title">
+        Denuncie os seus problemas<span>.</span>
+      </h2>
+      <p class="description">
+        Buscamos sanar toda e qualquer questão que você tiver. Mas antes de nos
+        contatar dê uma olhada nas <Link href="/duvidas" className="action-link"
+          >dúvidas frequentes</Link
+        >
+        dos nossos usuários.
       </p>
     </div>
-    <ul>
-      {#each institutions as institution}
-        <li>
-          <Water />
-          <span>{institution}</span>
-        </li>
-      {/each}
-    </ul>
-  </div>
-</section>
-<section id="doubt-info">
-  <div class="big">
-    <Doubts />
-  </div>
-  <div class="min">
-    <DoubtsMin />
-  </div>
-  <div>
-    <h2 class="main-title">
-      Denuncie os seus problemas<span>.</span>
-    </h2>
-    <p class="description">
-      Buscamos sanar toda e qualquer questão que você tiver. Mas antes de nos
-      contatar dê uma olhada nas <Link href="/duvidas" className="action-link"
-        >dúvidas frequentes</Link
-      >
-      dos nossos usuários.
-    </p>
-  </div>
-</section>
+  </section>
+</Wrapper>
 
 <style>
   /* Introduction */

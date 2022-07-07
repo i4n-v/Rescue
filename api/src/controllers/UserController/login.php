@@ -51,7 +51,8 @@ try {
   http_response_code(200);
   echo json_encode((object)[
     "USER_TOKEN" => $token,
-    "USER_ID" => $userData["USER_ID"]
+    "USER_ID" => $userData["USER_ID"],
+    "USER_NAME" => $userData["USER_NAME"]
   ]);
   exit();
 } catch (PDOException $e) {
