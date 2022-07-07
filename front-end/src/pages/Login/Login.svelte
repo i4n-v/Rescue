@@ -1,9 +1,9 @@
 <script>
-  import { Link, FormInput, SubmitButton } from "../../components/";
-  import ToTopPage from "../../helper/ToTopPage.svelte";
+  import { Wrapper, Link, FormInput, SubmitButton } from "../../components/";
   import Message from "../../helper/Message.svelte";
   import { authUser } from "../../services/userService";
   import cookie from "js-cookie";
+  import { navigate } from "svelte-routing";
 
   let loading = false;
   let success = false;
@@ -33,7 +33,8 @@
       loading = true;
       const response = await authUser(userData);
       cookie.set("access-token", response.USER_TOKEN);
-      cookie.set("user_id", response.USER_ID);
+      cookie.set("user-id", response.USER_ID);
+      cookie.set("user-name", response.USER_NAME);
 
       message = "Autenticação realizada com sucesso";
       success = true;
@@ -44,6 +45,8 @@
       senha = {
         value: "",
       };
+
+      navigate("/inicio", { replace: true });
     } catch (error) {
       message = error.response.data.message;
     } finally {
@@ -57,7 +60,7 @@
   <title>Rescue | Cadastro</title>
 </svelte:head>
 
-<ToTopPage>
+<Wrapper>
   <Message {success} {error} {message} {handleClose} />
   <section class="wrapper">
     <div class="img-container">
@@ -107,7 +110,7 @@
       </form>
     </div>
   </section>
-</ToTopPage>
+</Wrapper>
 
 <style>
   .wrapper {

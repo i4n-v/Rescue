@@ -1,6 +1,5 @@
 <script>
-  import { UnderlineButton, Link } from "../../components";
-  import ToTopPage from "../../helper/ToTopPage.svelte";
+  import { Wrapper, UnderlineButton, Link } from "../../components";
   import Water from "../../assets/svg/Water.svelte";
   import Doubts from "../../assets/svg/Doubts.svelte";
   import DoubtsMin from "../../assets/svg/DoubtsMin.svelte";
@@ -13,7 +12,7 @@
   <title>Rescue</title>
 </svelte:head>
 
-<ToTopPage>
+<Wrapper>
   <div id="rescue-intro">
     <div />
     <section id="titles">
@@ -80,7 +79,7 @@
       </p>
     </div>
   </section>
-</ToTopPage>
+</Wrapper>
 
 <style>
   /* Introduction */
