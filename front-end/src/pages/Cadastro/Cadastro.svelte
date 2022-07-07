@@ -1,11 +1,11 @@
 <script>
   import {
+    Wrapper,
     Link,
     FormInput,
     SubmitButton,
     SelectButton,
   } from "../../components/";
-  import ToTopPage from "../../helper/ToTopPage.svelte";
   import Message from "../../helper/Message.svelte";
   import { validate, cpfMask, cnpjMask } from "../../scripts/validateForm";
   import { postPeople } from "../../services/peopleService";
@@ -120,7 +120,7 @@
   <title>Rescue | Cadastro</title>
 </svelte:head>
 
-<ToTopPage>
+<Wrapper>
   <Message {success} {error} {message} {handleClose} />
   <section class="wrapper">
     <div class="img-container">
@@ -254,7 +254,7 @@
       </form>
     </div>
   </section>
-</ToTopPage>
+</Wrapper>
 
 <style>
   .wrapper {
