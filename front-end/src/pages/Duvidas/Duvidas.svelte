@@ -1,13 +1,12 @@
 <script>
-  import { ComponetDuv } from "../../components";
-  import ToTopPage from "../../helper/ToTopPage.svelte";
+  import { Wrapper, ComponetDuv } from "../../components";
 </script>
 
 <svelte:head>
   <title>Rescue | Dúvidas</title>
 </svelte:head>
 
-<ToTopPage>
+<Wrapper>
   <div class="box">
     <h1 id="titulo">Perguntas Frequentes<span>.</span></h1>
     <div class="list-item-grey">
@@ -41,7 +40,7 @@
       />
     </div>
   </div>
-</ToTopPage>
+</Wrapper>
 
 <style>
   #titulo {

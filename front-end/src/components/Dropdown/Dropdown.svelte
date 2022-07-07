@@ -3,13 +3,14 @@
 
   export let display = false;
   export let links = [];
+  export let responsive = true;
 </script>
 
 {#if display}
-  <ul id="dropdown">
-    {#each links as { href, name }}
+  <ul id="dropdown" class={responsive ? "" : "not-responsive"}>
+    {#each links as { href, name, onClick }}
       <li>
-        <Link {href} className="dropdown-links">{name}</Link>
+        <Link {href} className="dropdown-links" {onClick}>{name}</Link>
       </li>
     {/each}
   </ul>
@@ -24,13 +25,16 @@
     padding: 20px;
     background: var(--c11);
     min-width: 260px;
-    display: flex;
     flex-direction: column;
     gap: 8px;
     border-radius: 5px;
     display: none;
-    animation: scale 0.3s ease-in;
+    animation: scale 0.2s ease-in;
     z-index: 1000;
+  }
+
+  :global(.not-responsive) {
+    display: flex !important;
   }
 
   #dropdown::after {
