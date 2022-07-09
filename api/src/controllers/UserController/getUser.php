@@ -1,5 +1,5 @@
 <?php
-$id = $_GET["id"];
+$id = $_GET["userId"];
 $token = $_SERVER["HTTP_AUTHORIZATION"];
 
 if (!$token) {
