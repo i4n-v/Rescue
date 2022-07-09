@@ -19,6 +19,18 @@ if ($request == "/api") {
     case str_contains($request, '/api/user'):
       require __DIR__ . '/src/controllers/UserController/getUser.php';
       break;
+    case str_contains($request, '/api/post'):
+      require __DIR__ . '/src/controllers/PostController/getPost.php';
+      break;
+    case str_contains($request, '/api/location'):
+      require __DIR__ . '/src/controllers/PostController/getLocation.php';
+      break;
+    case str_contains($request, '/api/photos'):
+      require __DIR__ . '/src/controllers/PostController/getPhotos.php';
+      break;
+    case str_contains($request, '/api/comments'):
+      require __DIR__ . '/src/controllers/CommentController/getComments.php';
+      break;
     default:
       http_response_code(404);
       echo "Route not found";
@@ -35,6 +47,15 @@ if ($request == "/api") {
     case '/api/login':
       require __DIR__ . '/src/controllers/UserController/login.php';
       break;
+    case '/api/post':
+      require __DIR__ . '/src/controllers/PostController/createPost.php';
+      break;
+    case '/api/comments':
+      require __DIR__ . '/src/controllers/CommentController/createComment.php';
+      break;
+    case '/api/like':
+      require __DIR__ . '/src/controllers/PostController/createLike.php';
+      break;
     default:
       http_response_code(404);
       echo "Route not found";
@@ -49,6 +70,15 @@ if ($request == "/api") {
   }
 } else if ($requestMethod == "DELETE") {
   switch ($request) {
+    case str_contains($request, '/api/post'):
+      require __DIR__ . '/src/controllers/PostController/deletePost.php';
+      break;
+    case str_contains($request, '/api/comments'):
+      require __DIR__ . '/src/controllers/CommentController/deleteComment.php';
+      break;
+    case '/api/like':
+      require __DIR__ . '/src/controllers/PostController/deleteLike.php';
+      break;
     default:
       http_response_code(404);
       echo "Route not found";
