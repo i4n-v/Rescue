@@ -11,8 +11,12 @@ import Dropdown from "./Dropdown/Dropdown.svelte";
 import FormInput from "./FormInput/FormInput.svelte";
 import FormSearch from "./FormSearch/FormSearch.svelte";
 import FormSelect from "./FormSelect/FormSelect.svelte";
+import FormTextArea from "./FormTextArea/FormTextArea.svelte";
+import FormFile from "./FormFile/FormFile.svelte";
 import ComponetDuv from "./Duvidas/ComponetDuv.svelte";
 import Compconf from "./Configuracoes/Compconf.svelte";
+import Modal from "./Modal/Modal.svelte";
+import Map from "./Map/Map.svelte";
 
 export {
   Header,
@@ -27,7 +31,11 @@ export {
   FormInput,
   FormSelect,
   FormSearch,
+  FormTextArea,
+  FormFile,
   SubmitButton,
   ComponetDuv,
   Compconf,
+  Modal,
+  Map,
 }

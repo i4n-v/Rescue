@@ -5,28 +5,64 @@
   export let maxWidth = "100%";
   export let defaultValue = "-";
   export let options = [];
+  export let error = null;
   export let value = null;
+  export let label = null;
+  export let required = false;
+  export let className = "";
 
   // Events
   export let setValue = () => {};
 </script>
 
-<select
-  {id}
-  name={id}
-  {value}
-  {disabled}
-  class="field-form"
-  style={`max-width: ${maxWidth}`}
-  on:change={({ target }) => setValue(target.value)}
->
-  <option value={defaultValue} selected>{defaultValue}</option>
-  {#each options as option}
-    <option value={option}>{option}</option>
-  {/each}
-</select>
+<div class={`field-container ${className}`} style={`max-width: ${maxWidth}`}>
+  {#if !!label}
+    <label class="label-form" for={id}>
+      {label}
+      <span>{required ? "*" : ""}</span>
+    </label>
+  {/if}
+  <select
+    {id}
+    name={id}
+    {value}
+    {disabled}
+    class="field-form"
+    on:change={({ target }) => setValue(target.value)}
+    on:blur={({ target }) => setValue(target.value)}
+  >
+    <option value={defaultValue} selected>{defaultValue}</option>
+    {#each options as option}
+      <option value={option}>{option}</option>
+    {/each}
+  </select>
+  {#if !!error}
+    <p>{error}</p>
+  {/if}
+</div>
 
 <style>
+  .field-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .label-form {
+    font: var(--poppins-s);
+    font-weight: 500;
+    color: var(--c11);
+  }
+
+  .label-form > span {
+    color: var(--v02);
+  }
+
+  .field-container > p {
+    font: var(--roboto-xs);
+    color: var(--v03);
+  }
+
   .field-form {
     min-height: 48px;
     min-width: 270px;

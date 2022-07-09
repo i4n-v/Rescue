@@ -14,7 +14,7 @@
 <Footer />
 
 <style>
-  #wrapper {
+  :global(#wrapper) {
     flex: 1;
     position: relative;
   }
