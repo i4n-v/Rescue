@@ -1,6 +1,8 @@
 <?php
 $userId = $_GET["userId"];
 $filter = $_GET["filter"];
+$region = $_GET["region"] ?? "%";
+$title = $_GET["title"] ?? "";
 $page = intVal($_GET["page"] ?? 1);
 $limit = intVal($_GET["limit"] ?? 5);
 
@@ -41,9 +43,9 @@ try {
     (SELECT COUNT(`COMMENTS`.`POST_ID`) FROM COMMENTS WHERE `COMMENTS`.`POST_ID` = `POSTS`.`POST_ID`) AS `TOTAL_COMMENTS`,
     (SELECT CASE WHEN COUNT(`LIKES`.`POST_ID`) > 0 THEN 'true' ELSE 'false' END 
     FROM LIKES WHERE `LIKES`.`USER_ID` = ? AND `LIKES`.`POST_ID` = `POSTS`.`POST_ID`) AS `LIKED`
-    FROM `POSTS`";
+    FROM `POSTS` WHERE (`POST_TITLE` LIKE ? OR `POST_TITLE` LIKE ?) AND (SELECT `LOC_REGION` FROM LOCATIONS WHERE `LOCATIONS`.`POST_ID` = `POSTS`.`POST_ID`) LIKE ?";
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$userId]);
+    $stmt->execute([$userId, "%$title%", "%" . strtolower($title) . "%", $region]);
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
   } else {
     $query = "SELECT 
