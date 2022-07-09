@@ -4,23 +4,34 @@
     FormSelect,
     FormSearch,
     AddButton,
+    Modal,
   } from "../../components/";
+  import PostForm from "./components/PostForm.svelte";
   import { states } from "../../scripts/regions";
   import Message from "../../helper/Message.svelte";
+  import cookie from "js-cookie";
 
+  // states
   let loading = false;
-  let success = false;
   let error = false;
   let message = "";
+  let modal = false;
 
+  // filters
   let region = "-";
   let search = "";
 
   function handleClose() {}
+
+  function togleModal() {
+    modal = !modal;
+  }
+
+  function handleSubmit() {}
 </script>
 
 <Wrapper>
-  <Message {success} {error} {message} {handleClose} />
+  <Message {error} {message} {handleClose} />
   <div id="feed-container">
     <header class="filters-container">
       <h1 class="main-title">Linha do tempo<span>.</span></h1>
@@ -37,9 +48,13 @@
           value={search}
           setValue={(value) => (region = value)}
         />
-        <AddButton />
+        <AddButton onClick={togleModal} />
       </div>
     </header>
+    <Modal display={modal} handleClick={togleModal}>
+      <PostForm />
+    </Modal>
+    <section id="post-list" />
   </div>
 </Wrapper>
 
@@ -62,6 +77,7 @@
 
   .filters-container > div {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
   }
 
@@ -72,5 +88,15 @@
 
   .main-title > span {
     color: var(--p01);
+  }
+
+  #post-list {
+    min-height: 520px;
+    max-width: 1160px;
+    padding: 0px 12px;
+    margin: 60px auto 0px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 </style>
