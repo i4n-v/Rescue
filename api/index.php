@@ -1,8 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Origin, Authorization");
 
 require_once "./src/dataBase/conectDatabase.php";
 
@@ -47,8 +47,11 @@ if ($request == "/api") {
     case '/api/login':
       require __DIR__ . '/src/controllers/UserController/login.php';
       break;
-    case '/api/post':
+    case str_contains($request, '/api/post'):
       require __DIR__ . '/src/controllers/PostController/createPost.php';
+      break;
+    case str_contains($request, '/api/update/post'):
+      require __DIR__ . '/src/controllers/PostController/updatePost.php';
       break;
     case '/api/comments':
       require __DIR__ . '/src/controllers/CommentController/createComment.php';
