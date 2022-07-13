@@ -19,7 +19,7 @@ if (isset($token)) {
   try {
     $query = "SELECT `COMT_ID`, `USER_ID` FROM `COMMENTS` WHERE `COMT_ID` = ? AND `USER_ID` = ?";
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$userId, $commentId]);
+    $stmt->execute([$commentId, $userId]);
     $comment = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$comment) {
@@ -47,7 +47,7 @@ if (isset($token)) {
 try {
   $query = "DELETE FROM COMMENTS WHERE `COMT_ID` = ? AND `USER_ID` = ?";
   $stmt = $pdo->prepare($query);
-  $stmt->execute([$userId, $commentId]);
+  $stmt->execute([$commentId, $userId]);
 
   http_response_code(200);
   echo json_encode((object)[
