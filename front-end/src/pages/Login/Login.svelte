@@ -71,7 +71,7 @@
       <form>
         <FormInput
           id="email"
-          type="text"
+          type="email"
           label="Email"
           placeholder="contato@email.com"
           className="col-span-2"

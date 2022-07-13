@@ -60,7 +60,7 @@ const validate = (value, type) => {
   };
 
   if (type === false) return true;
-  if (value.length === 0) {
+  if (value.length === 0 || value === "-") {
     return {
       valide: false,
       describe: 'Preencha um valor.'

@@ -1,8 +1,10 @@
 <script>
   import Search from "../../assets/svg/Search.svelte";
+  import Send from "../../assets/svg/Send.svelte";
 
   // Atributes
   export let id = "";
+  export let type = "add";
   export let placeholder = "";
   export let className = "";
   export let disabled = false;
@@ -32,20 +34,26 @@
     type="button"
     on:click={(event) => {
       event.preventDefault();
-      onClick;
+      onClick();
     }}
   >
-    <Search />
+    {#if type === "add"}
+      <Search />
+    {:else}
+      <Send />
+    {/if}
   </button>
 </div>
 
 <style>
   .field-container {
     position: relative;
+    width: 100%;
   }
 
   .search-field {
     min-height: 48px;
+    width: 100%;
     min-width: 300px;
     padding: 0px 10px;
     background: var(--c01);
