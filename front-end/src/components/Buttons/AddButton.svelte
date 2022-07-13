@@ -9,7 +9,7 @@
   class="add-button"
   on:click={(event) => {
     event.preventDefault();
-    onClick;
+    onClick();
   }}
 >
   <Add />
