@@ -1,25 +1,34 @@
 <script>
   import AddFile from "../../assets/svg/AddFile.svelte";
+  import { onMount } from "svelte";
 
   // Atributes
   export let id = "";
   export let className = "";
+  export let imageUrl = null;
   export let disabled = false;
 
   // Events
   export let setValue = () => {};
 
   function readImage(target) {
-    if (target.files && target.files[0]) {
+    const img = document.getElementById(id + "-img");
+    if (target?.files && target?.files[0]) {
       const file = new FileReader();
       file.onload = function (e) {
-        const img = document.getElementById(id + "-img");
         img.src = e.target.result;
         img.style.display = "block";
       };
       file.readAsDataURL(target.files[0]);
+    } else if (!!imageUrl) {
+      img.src = imageUrl;
+      img.style.display = "block";
     }
   }
+
+  onMount(() => {
+    readImage();
+  });
 </script>
 
 <div class={`field-container ${className}`}>

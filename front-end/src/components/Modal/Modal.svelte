@@ -1,6 +1,19 @@
 <script>
+  import { onMount, onDestroy, afterUpdate } from "svelte";
+
   export let display = false;
   export let handleClick = () => {};
+
+  afterUpdate(() => {
+    if (display) {
+      document.body.style.overflowY = "hidden";
+      document.getElementById("wrapper").style.position = "static";
+      document.getElementById("modal").style.top = window.scrollY + "px";
+    } else {
+      document.body.style.overflowY = "auto";
+      document.getElementById("wrapper").style.position = "relative";
+    }
+  });
 
   // events
   function togleModal({ target }) {
@@ -41,15 +54,7 @@
     box-shadow: var(--shadow01);
     border: 1px solid var(--p01);
     max-height: 650px;
-    overflow-y: scroll;
-  }
-
-  :global(#wrapper) {
-    position: static !important;
-  }
-
-  :global(body) {
-    overflow-y: hidden;
+    overflow-y: auto;
   }
 
   @media (max-width: 720px) {
