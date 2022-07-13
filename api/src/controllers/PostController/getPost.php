@@ -1,7 +1,7 @@
 <?php
-$userId = $_GET["userId"];
+$userId = ($_GET["userId"] == "null" || !$_GET["userId"]) ? "%" : $_GET["userId"];
 $filter = $_GET["filter"];
-$region = $_GET["region"] ?? "%";
+$region = ($_GET["region"] == "null" || !$_GET["region"]) ? "%" : $_GET["region"];
 $title = $_GET["title"] ?? "";
 $page = intVal($_GET["page"] ?? 1);
 $limit = intVal($_GET["limit"] ?? 5);
@@ -42,8 +42,11 @@ try {
 	  (SELECT COUNT(`LIKES`.`POST_ID`) FROM LIKES WHERE `LIKES`.`POST_ID` = `POSTS`.`POST_ID`) AS `TOTAL_LIKES`,
     (SELECT COUNT(`COMMENTS`.`POST_ID`) FROM COMMENTS WHERE `COMMENTS`.`POST_ID` = `POSTS`.`POST_ID`) AS `TOTAL_COMMENTS`,
     (SELECT CASE WHEN COUNT(`LIKES`.`POST_ID`) > 0 THEN 'true' ELSE 'false' END 
-    FROM LIKES WHERE `LIKES`.`USER_ID` = ? AND `LIKES`.`POST_ID` = `POSTS`.`POST_ID`) AS `LIKED`
-    FROM `POSTS` WHERE (`POST_TITLE` LIKE ? OR `POST_TITLE` LIKE ?) AND (SELECT `LOC_REGION` FROM LOCATIONS WHERE `LOCATIONS`.`POST_ID` = `POSTS`.`POST_ID`) LIKE ?";
+    FROM LIKES WHERE `LIKES`.`USER_ID` LIKE ? AND `LIKES`.`POST_ID` = `POSTS`.`POST_ID`) AS `LIKED`,
+    `USER_NAME`,
+    `USERS`.`USER_ID`,
+    `USER_PHOTO`
+    FROM `POSTS` INNER JOIN `USERS` ON `POSTS`.`USER_ID` = `USERS`.`USER_ID` AND (`POST_TITLE` LIKE ? OR `POST_TITLE` LIKE ?) AND (SELECT `LOC_REGION` FROM LOCATIONS WHERE `LOCATIONS`.`POST_ID` = `POSTS`.`POST_ID`) LIKE ?";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$userId, "%$title%", "%" . strtolower($title) . "%", $region]);
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -57,8 +60,11 @@ try {
 	  (SELECT COUNT(`LIKES`.`POST_ID`) FROM LIKES WHERE `LIKES`.`POST_ID` = `POSTS`.`POST_ID`) AS `TOTAL_LIKES`,
     (SELECT COUNT(`COMMENTS`.`POST_ID`) FROM COMMENTS WHERE `COMMENTS`.`POST_ID` = `POSTS`.`POST_ID`) AS `TOTAL_COMMENTS`,
     (SELECT CASE WHEN COUNT(`LIKES`.`POST_ID`) > 0 THEN 'true' ELSE 'false' END 
-    FROM LIKES WHERE `LIKES`.`USER_ID` = `POSTS`.`USER_ID` AND `LIKES`.`POST_ID` = `POSTS`.`POST_ID`) AS `LIKED`
-    FROM `POSTS` WHERE `POSTS`.`USER_ID` = ?";
+    FROM LIKES WHERE `LIKES`.`USER_ID` = `POSTS`.`USER_ID` AND `LIKES`.`POST_ID` = `POSTS`.`POST_ID`) AS `LIKED`,
+    `USER_NAME`,
+    `USERS`.`USER_ID`,
+    `USER_PHOTO`
+    FROM `POSTS` INNER JOIN `USERS` ON `POSTS`.`USER_ID` LIKE ?";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$userId]);
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);

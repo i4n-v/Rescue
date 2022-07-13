@@ -15,7 +15,7 @@
 
   // init map api
   const loader = new Loader({
-    apiKey: "AIzaSyCQ9IYFRX0SvZ2GD3mdAeXl_KVrgQG4Wbw",
+    apiKey: "",
     version: "weekly",
     language: "pt-BR",
   });

@@ -19,7 +19,7 @@ if (isset($token)) {
   try {
     $query = "SELECT `POST_ID`, `USER_ID` FROM `POSTS` WHERE `POST_ID` = ? AND `USER_ID` = ?";
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$userId, $postId]);
+    $stmt->execute([$postId, $userId]);
     $post = $stmt->fetch();
 
     if (!$post) {
