@@ -10,6 +10,7 @@
   import { validate, cpfMask, cnpjMask } from "../../scripts/validateForm";
   import { postPeople } from "../../services/peopleService";
   import { postInstitution } from "../../services/institutionService";
+  import asideLogo from "../../assets/img/aside-logo.png";
 
   let loading = false;
   let error = false;
@@ -124,7 +125,7 @@
   <Message {success} {error} {message} {handleClose} />
   <section class="wrapper">
     <div class="img-container">
-      <img src="/src/assets/img/aside-logo.png" alt="Logo da Rescue" />
+      <img src={asideLogo} alt="Logo da Rescue" />
     </div>
     <div class="form-container anime-left">
       <h1 class="title">Cadastre-se<span>.</span></h1>

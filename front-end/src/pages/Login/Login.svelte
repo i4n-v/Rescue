@@ -4,6 +4,7 @@
   import { authUser } from "../../services/userService";
   import cookie from "js-cookie";
   import { navigate } from "svelte-routing";
+  import asideLogo from "../../assets/img/aside-logo.png";
 
   let loading = false;
   let success = false;
@@ -64,7 +65,7 @@
   <Message {success} {error} {message} {handleClose} />
   <section class="wrapper">
     <div class="img-container">
-      <img src="/src/assets/img/aside-logo.png" alt="Logo da Rescue" />
+      <img src={asideLogo} alt="Logo da Rescue" />
     </div>
     <div class="form-container anime-left">
       <h1 class="title">Login<span>.</span></h1>
